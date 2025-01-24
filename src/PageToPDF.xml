@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="rapiddata.pagetopdf.PageToPDF" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Page To PDF</name>
+    <description>A widget to Convert a Page to PDF format and to download the pdf</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="ClassName" type="string" required="true">
+                <caption>ClassName</caption>
+                <description>Enter the class of the component needed to be Downloaded</description>
+            </property>
+
+            <property key="FileName" type="string" required="true">
+                <caption>FileName</caption>
+                <description>Enter the name of the file needed to be Downloaded</description>
+            </property>
+            
+            <property key="onChangeAction" type="action" required="false">
+                <caption>On Change</caption>
+                <description>Action triggered after generating the PDF.</description>
+            </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Data Source">
+               <property key="PDFName" type="attribute">
+                    <caption>File Name Attribute</caption>
+                    <description>Attribute to store the name of the PDF file.</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+
+                <property key="Base64" type="attribute">
+                    <caption>Base64 String</caption>
+                    <description>Attribute to store the base64 content of the generated PDF.</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+
+    </properties>
+</widget>

@@ -1,0 +1,54 @@
+import { createElement, useCallback, useState } from "react";
+import html2pdf from "html2pdf.js";
+
+export function HelloWorldSample({ ClassName, FileName, onChangeAction, dataSource }) {
+    const handleDownload = useCallback(() => {
+        const element = document.querySelector(`.${ClassName}`);
+        if (element) {
+            const options = {
+                filename: `${FileName}.pdf`,
+                jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+            };
+            html2pdf()
+                .set(options)
+                .from(element)
+                .outputPdf("blob")
+                .then((pdfBlob) => {
+                    // html2pdf().from(element).save(`${FileName}.pdf`);
+                    const pdfUrl = URL.createObjectURL(pdfBlob);
+                    window.open(pdfUrl, "_blank");
+                    // const fileEntity = {
+                    //     Name: FileName,              // File name to be saved in the entity
+                    //     Contents: pdfBlob,           // Store the Blob directly in the Contents attribute
+                    //     DeleteAfterDownload: true,   // Optional: if you want to delete after download
+                    //     HasContents: true,           // Set this flag to indicate the file is not empty
+                    //     Size: pdfBlob.size           // The size of the PDF
+                    // };
+                    //  dataSource.setValue(fileEntity);
+                    //  dataSource.setValue(value)("Name", FileName);
+                    //  dataSource.setValue(value)("Contents", pdfBlob);
+                    //  dataSource.setValue(value)("DeleteAfterDownload", true);
+                    //  dataSource.setValue(value)("HasContents", true);
+                    //  dataSource.setValue(value)("Size", pdfBlob.size);
+                    //  console.log(dataSource+"-----------Datasource data");
+                     if (onChangeAction && onChangeAction.canExecute){
+                        onChangeAction.execute();
+                     }
+                     else{
+                        console.log("onChangeAction is not set or canExecute is false.");
+                     }
+                })
+                .catch((error) => {
+                    console.error("Error generating PDF:", error);
+                });
+        } else {
+            console.log("Element not found: Ensure the className is correct.");
+        }
+    }, [ClassName, FileName, onChangeAction, dataSource]);
+
+    return (
+        <div>
+            <button onClick={handleDownload}>Download PDF</button>
+        </div>
+    );
+}
