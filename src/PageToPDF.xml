@@ -22,6 +22,11 @@
                 <caption>On Change</caption>
                 <description>Action triggered after generating the PDF.</description>
             </property>
+
+            <property key="ButtonStyle" type="string" required="false">
+                    <caption>Button Style ClassName</caption>
+                    <description>Provide the className for the Style needed for the button</description>
+                </property>
             </propertyGroup>
 
             <propertyGroup caption="Data Source">
@@ -41,6 +46,16 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
-
+            <propertyGroup caption="File Options">
+                <property key="fileOption" type="enumeration" required="true" defaultValue="Download">
+                    <caption>File Option</caption>
+                    <description>Choose how to handle the file: Download, Preview, or Get Base64 and do nothing</description>
+                    <enumerationValues>
+                        <enumerationValue key="Download">Download File</enumerationValue>
+                        <enumerationValue key="Preview">Preview File</enumerationValue>
+                        <enumerationValue key="Nothing">Do nothing</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
     </properties>
 </widget>
