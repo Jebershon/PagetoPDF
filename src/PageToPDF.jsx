@@ -1,8 +1,7 @@
-import { createElement } from "react";
-import React from 'react';
-import { HelloWorldSample } from "./components/HelloWorldSample";
 import "./ui/PageToPDF.css";
+import { PdfExportButton } from "./components/PdfExportButton";
+import { createElement } from "react";
 
-export function PageToPDF({ClassName,FileName,onChangeAction,PDFName,Base64,ButtonStyle,fileOption}) {
-    return <HelloWorldSample ClassName={ClassName} FileName={FileName} onChangeAction={onChangeAction} PDFName={ PDFName} Base64={Base64} ButtonStyle={ButtonStyle} fileOption={fileOption}/>;
+export function PageToPDF(props) {
+    return <PdfExportButton {...props} />;
 }

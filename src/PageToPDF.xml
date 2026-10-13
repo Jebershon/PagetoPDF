@@ -17,45 +17,193 @@
                 <caption>FileName</caption>
                 <description>Enter the name of the file needed to be Downloaded</description>
             </property>
-            
+
             <property key="onChangeAction" type="action" required="false">
                 <caption>On Change</caption>
                 <description>Action triggered after generating the PDF.</description>
             </property>
 
             <property key="ButtonStyle" type="string" required="false">
-                    <caption>Button Style ClassName</caption>
-                    <description>Provide the className for the Style needed for the button</description>
-                </property>
-            </propertyGroup>
+                <caption>Button Style ClassName</caption>
+                <description>Provide the className for the Style needed for the button</description>
+            </property>
+        </propertyGroup>
 
-            <propertyGroup caption="Data Source">
-               <property key="PDFName" type="attribute">
-                    <caption>File Name Attribute</caption>
-                    <description>Attribute to store the name of the PDF file.</description>
-                    <attributeTypes>
-                        <attributeType name="String" />
-                    </attributeTypes>
-                </property>
+        <propertyGroup caption="Data Source">
+            <property key="PDFName" type="attribute">
+                <caption>File Name Attribute</caption>
+                <description>Attribute to store the name of the PDF file.</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
 
-                <property key="Base64" type="attribute">
-                    <caption>Base64 String</caption>
-                    <description>Attribute to store the base64 content of the generated PDF.</description>
-                    <attributeTypes>
-                        <attributeType name="String" />
-                    </attributeTypes>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="File Options">
-                <property key="fileOption" type="enumeration" required="true" defaultValue="Download">
-                    <caption>File Option</caption>
-                    <description>Choose how to handle the file: Download, Preview, or Get Base64 and do nothing</description>
-                    <enumerationValues>
-                        <enumerationValue key="Download">Download File</enumerationValue>
-                        <enumerationValue key="Preview">Preview File</enumerationValue>
-                        <enumerationValue key="Nothing">Do nothing</enumerationValue>
-                    </enumerationValues>
-                </property>
-            </propertyGroup>
+            <property key="Base64" type="attribute">
+                <caption>Base64 String</caption>
+                <description>Attribute to store the base64 content of the generated PDF.</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="File Options">
+            <property key="fileOption" type="enumeration" required="true" defaultValue="Download">
+                <caption>File Option</caption>
+                <description>Choose how to handle the file: Download, Preview, or Get Base64 and do nothing</description>
+                <enumerationValues>
+                    <enumerationValue key="Download">Download File</enumerationValue>
+                    <enumerationValue key="Preview">Preview File</enumerationValue>
+                    <enumerationValue key="Nothing">Do nothing</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Page layout">
+            <property key="pageSize" type="enumeration" required="true" defaultValue="A4">
+                <caption>Page size</caption>
+                <description>Default paper size for every page.</description>
+                <enumerationValues>
+                    <enumerationValue key="A4">A4</enumerationValue>
+                    <enumerationValue key="A3">A3</enumerationValue>
+                    <enumerationValue key="A5">A5</enumerationValue>
+                    <enumerationValue key="Letter">Letter</enumerationValue>
+                    <enumerationValue key="Legal">Legal</enumerationValue>
+                </enumerationValues>
+            </property>
+
+            <property key="orientation" type="enumeration" required="true" defaultValue="Portrait">
+                <caption>Orientation</caption>
+                <description>Default orientation for every page.</description>
+                <enumerationValues>
+                    <enumerationValue key="Portrait">Portrait</enumerationValue>
+                    <enumerationValue key="Landscape">Landscape</enumerationValue>
+                </enumerationValues>
+            </property>
+
+            <property key="marginTop" type="integer" required="true" defaultValue="10">
+                <caption>Margin top (mm)</caption>
+                <description>Top margin in millimetres. The header is drawn inside this margin.</description>
+            </property>
+
+            <property key="marginRight" type="integer" required="true" defaultValue="10">
+                <caption>Margin right (mm)</caption>
+                <description>Right margin in millimetres.</description>
+            </property>
+
+            <property key="marginBottom" type="integer" required="true" defaultValue="10">
+                <caption>Margin bottom (mm)</caption>
+                <description>Bottom margin in millimetres. The footer and page numbers are drawn inside this margin.</description>
+            </property>
+
+            <property key="marginLeft" type="integer" required="true" defaultValue="10">
+                <caption>Margin left (mm)</caption>
+                <description>Left margin in millimetres.</description>
+            </property>
+
+            <property key="overflowMode" type="enumeration" required="true" defaultValue="Flow">
+                <caption>Overflow mode</caption>
+                <description>Flow: content taller than a page continues on extra pages, with breaks placed between rows, lines and images. Fit to page: content is scaled down to fit one page.</description>
+                <enumerationValues>
+                    <enumerationValue key="Flow">Flow</enumerationValue>
+                    <enumerationValue key="FitToPage">Fit to page</enumerationValue>
+                </enumerationValues>
+            </property>
+
+            <property key="renderScale" type="integer" required="true" defaultValue="2">
+                <caption>Render scale</caption>
+                <description>Rendering resolution, 1 to 4. Higher is sharper but produces a larger file and takes longer.</description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Pages">
+            <property key="pages" type="object" isList="true" required="false">
+                <caption>Pages</caption>
+                <description>Each entry starts a new PDF page for every element with the given class inside the ClassName element, in list order. Leave empty to export the ClassName element as one flowing document.</description>
+                <properties>
+                    <propertyGroup caption="Page">
+                        <property key="pageClass" type="string" required="true">
+                            <caption>Page class</caption>
+                            <description>CSS class of the container(s) for this page. Each matching element becomes its own page, in page order.</description>
+                        </property>
+
+                        <property key="pageSize" type="enumeration" required="true" defaultValue="Inherit">
+                            <caption>Page size</caption>
+                            <description>Paper size for this page.</description>
+                            <enumerationValues>
+                                <enumerationValue key="Inherit">Inherit from page layout</enumerationValue>
+                                <enumerationValue key="A4">A4</enumerationValue>
+                                <enumerationValue key="A3">A3</enumerationValue>
+                                <enumerationValue key="A5">A5</enumerationValue>
+                                <enumerationValue key="Letter">Letter</enumerationValue>
+                                <enumerationValue key="Legal">Legal</enumerationValue>
+                            </enumerationValues>
+                        </property>
+
+                        <property key="orientation" type="enumeration" required="true" defaultValue="Inherit">
+                            <caption>Orientation</caption>
+                            <description>Orientation for this page.</description>
+                            <enumerationValues>
+                                <enumerationValue key="Inherit">Inherit from page layout</enumerationValue>
+                                <enumerationValue key="Portrait">Portrait</enumerationValue>
+                                <enumerationValue key="Landscape">Landscape</enumerationValue>
+                            </enumerationValues>
+                        </property>
+
+                        <property key="overflowMode" type="enumeration" required="true" defaultValue="Inherit">
+                            <caption>Overflow mode</caption>
+                            <description>What happens when this page's content is taller than one page.</description>
+                            <enumerationValues>
+                                <enumerationValue key="Inherit">Inherit from page layout</enumerationValue>
+                                <enumerationValue key="Flow">Flow</enumerationValue>
+                                <enumerationValue key="FitToPage">Fit to page</enumerationValue>
+                            </enumerationValues>
+                        </property>
+                    </propertyGroup>
+                </properties>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Header &amp; footer">
+            <property key="headerText" type="textTemplate" required="false">
+                <caption>Header text</caption>
+                <description>Optional text centred in the top margin of every page.</description>
+            </property>
+
+            <property key="footerText" type="textTemplate" required="false">
+                <caption>Footer text</caption>
+                <description>Optional text in the bottom margin of every page.</description>
+            </property>
+
+            <property key="showPageNumbers" type="boolean" required="true" defaultValue="false">
+                <caption>Show page numbers</caption>
+                <description>Draw a page number in the bottom margin of every page.</description>
+            </property>
+
+            <property key="pageNumberFormat" type="string" required="false" defaultValue="Page {page} of {total}">
+                <caption>Page number format</caption>
+                <description>{page} is replaced by the page number and {total} by the number of pages.</description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Formatting &amp; button">
+            <property key="excludeClass" type="string" required="false" defaultValue="pdf-exclude">
+                <caption>Exclude class</caption>
+                <description>Elements with this class are left out of the PDF. The export button is always left out.</description>
+            </property>
+
+            <property key="avoidBreakClass" type="string" required="false" defaultValue="pdf-avoid-break">
+                <caption>Avoid break class</caption>
+                <description>In Flow mode, elements with this class are never split across pages (table rows, images and text lines are never split either).</description>
+            </property>
+
+            <property key="buttonCaption" type="textTemplate" required="false">
+                <caption>Button caption</caption>
+                <description>Text shown on the export button.</description>
+                <translations>
+                    <translation lang="en_US">Download PDF</translation>
+                </translations>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

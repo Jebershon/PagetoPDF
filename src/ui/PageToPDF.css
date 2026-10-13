@@ -1,6 +1,4 @@
-/*
-Place your custom CSS here
-*/
-.widget-hello-world {
-
+.pagetopdf-widget button[disabled] {
+    cursor: progress;
+    opacity: 0.7;
 }

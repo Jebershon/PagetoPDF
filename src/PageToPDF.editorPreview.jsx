@@ -1,8 +1,14 @@
 import { createElement } from "react";
-import { HelloWorldSample } from "./components/HelloWorldSample.jsx";
 
-export function preview({ClassName, FileName, onChangeAction,PDFName,Base64,ButtonStyle,fileOption}) {
-    return <HelloWorldSample ClassName={ClassName} FileName={FileName} onChangeAction={onChangeAction} PDFName={ PDFName} Base64={Base64} ButtonStyle={ButtonStyle} fileOption={fileOption}/>;
+// Design-mode preview: a plain button with the configured caption. It doesn't load the PDF code.
+export function preview({ buttonCaption, ButtonStyle, class: className }) {
+    return (
+        <div className={className}>
+            <button type="button" className={ButtonStyle}>
+                {buttonCaption || "Download PDF"}
+            </button>
+        </div>
+    );
 }
 
 export function getPreviewCss() {
